@@ -21,6 +21,7 @@ function makeCardCountry() {
     const countryObj = fetchCountries(countryName)
     countryObj
     .then(data => {
+        console.log(data)
         if(!data) {
             clearCard()
             Notiflix.Notify.failure('Oops, there is no country with that name');
@@ -43,20 +44,20 @@ function makeMockupCountry(country) {
 
 
 function listCountryMarkup(country) {
-    const markup = country.map(({ name: { common }, flags: { png }}) => {
+    const markup = country.map(({ name: { official }, flags: { png }}) => {
         return ` <ul class='main-list'>
                     <img src="${png}" class="image">
-                    <h2>${common}</h2>
+                    <h2>${official}</h2>
                  </ul>`
     }).join('')
     refs.cardCountryEl.innerHTML = markup
 }
 
 function countryCardMarkup(country) {
-    const markup = country.map(({ name: { common }, flags: { png },capital, population, languages }) => {
+    const markup = country.map(({ name: { official }, flags: { png },capital, population, languages }) => {
         return ` <ul class='main-list'>
                     <img src="${png}" class="image">
-                    <h2>${common}</h2>
+                    <h2>${official}</h2>
                  </ul>
                  <ul class='list'>
                     <li class='country-desc'><span class="paragraph">Capital:</span>${capital}</li>
